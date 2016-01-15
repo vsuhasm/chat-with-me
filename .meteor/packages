@@ -22,3 +22,8 @@ twbs:bootstrap
 iron:router
 anti:fake
 dburles:factory
+fortawesome:fontawesome
+accounts-ui
+accounts-password
+peppelg:bootstrap-3-modal
+mizzao:autocomplete

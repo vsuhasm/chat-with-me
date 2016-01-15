@@ -9,14 +9,15 @@
 					        <span class="icon-bar"></span>
 					        <span class="icon-bar"></span>                        
 					    </button>
-				    	<a class="navbar-brand" href="#">ChatWithMe!</a>
+				    	<a class="navbar-brand" href="/">ChatWithMe!</a>
 				    </div>
 				    <div class="collapse navbar-collapse" id="myNavbar">
 				      <ul class="nav navbar-nav">
-				        <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Public</a></li>
-				        <li><a href="#"><span class="glyphicon glyphicon-lock"></span> Private</a></li>
-				        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Contact</a></li>
-				        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm"><span class="glyphicon glyphicon-log-in"></span> Login/Register</a></li>
+				        {{#if currentUser}}<li><a href="/createroom"><span class="glyphicon glyphicon-globe"></span> Create room</a></li>
+				        <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>{{/if}}
+				        <li><a href="/contact"><span class="glyphicon glyphicon-user"></span> Contact</a></li>
+				        
+				        <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Login/Register</a></li>
 				      </ul>
 				    </div>
 				</nav>
@@ -27,142 +28,16 @@
 								<!-- Button trigger modal --> 
 			    <div id="desc">
 				    <p id="desc-text">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+				    	<h1>ChatWithMe!</h1>
+						Love the professional looks of Slack? Oh, you also love IRC? Presenting ChatWithMe!, a real-time messaging application built using Bootstrap and Meteor.js. Now you can effectively communicate with your team members and your friends at the same place. Login or Register for an account to try it now! I'm sure you'll be hooked in no time.
 					</p>
-					<button class="btn btn-primary btn-lg" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Register</button>
+					<a href="/signin" class="btn btn-primary btn-lg" type="button">Login/Register</a>
+					
 				  	
 			  	</div>
 				  
 
-				<!-- Modal -->
-				<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-				  <div class="modal-dialog modal-sm">
-				    <div class="modal-content">
-				        <br>
-				        <div class="bs-example bs-example-tabs">
-				            <ul id="myTab" class="nav nav-tabs">
-				              <li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>
-				              <li class=""><a href="#signup" data-toggle="tab">Register</a></li>
-				              <li class=""><a href="#why" data-toggle="tab">Why?</a></li>
-				            </ul>
-				        </div>
-				      	<div class="modal-body">
-				        	<div id="myTabContent" class="tab-content">
-				        		<div class="tab-pane fade in" id="why">
-				        			<p>We need this information so that you can receive access to the site and its content. Rest assured your information will not be sold, traded, or given to anyone.</p>
-				        			<br>
-				        			<p>Please contact <a href="mailto:vsuhas.m@gmail.com">vsuhas.m@gmail.com</a>for any other inquiries.</p>
-				        		</div>
-				        		<div class="tab-pane fade active in" id="signin">
-				            		<form class="form-horizontal">
-				            			<fieldset>
-				            <!-- Sign In Form -->
-				            <!-- Text input-->
-				            				<div class="control-group">
-				              					<label class="control-label" for="userid">Alias:</label>
-				              					<div class="controls">
-				                					<input required="" id="userid" name="userid" type="text" class="form-control input-medium" placeholder="JoeSixpack">
-				              					</div>
-				            				</div>
-
-				            <!-- Password input-->
-								            <div class="control-group">
-								            	<label class="control-label" for="passwordinput">Password:</label>
-								            	<div class="controls">
-								                	<input required="" id="passwordinput" name="passwordinput" class="form-control input-medium" type="password" placeholder="********">
-								              	</div>
-								            </div>
-
-				            <!-- Multiple Checkboxes (inline) -->
-				            				<div class="control-group">
-				              					<label class="control-label" for="rememberme"></label>
-				              					<div class="controls">
-				                					<label class="checkbox inline" for="rememberme-0">
-				                  						<input type="checkbox" name="rememberme" id="rememberme-0" value="Remember me">
-				                  						Remember me
-				                					</label>
-				              					</div>
-				            				</div>
-
-				            <!-- Button -->
-				            				<div class="control-group">
-				              					<label class="control-label" for="signin"></label>
-				              					<div class="controls">
-				                					<button id="signin" name="signin" class="btn btn-success">Sign In</button>
-				              					</div>
-				            				</div>
-				            			</fieldset>
-				            		</form>
-				        		</div>
-				        		<div class="tab-pane fade" id="signup">
-				            		<form class="form-horizontal">
-				            			<fieldset>
-				            <!-- Sign Up Form -->
-				            <!-- Text input-->
-				            				<div class="control-group">
-				              					<label class="control-label" for="Email">Email:</label>
-				              					<div class="controls">
-				                					<input id="Email" name="Email" class="form-control input-large" type="text" placeholder="JoeSixpack@sixpacksrus.com">
-				              					</div>
-				            				</div>
-				            
-				            <!-- Text input-->
-				            				<div class="control-group">
-				              					<label class="control-label" for="userid">Alias:</label>
-				              					<div class="controls">
-				                					<input id="userid" name="userid" class="form-control input-large" type="text" placeholder="JoeSixpack">
-				              					</div>
-				            				</div>
-				            
-				            <!-- Password input-->
-				            				<div class="control-group">
-				              					<label class="control-label" for="password">Password:</label>
-				              					<div class="controls">
-				                					<input id="password" name="password" class="form-control input-large" type="password" placeholder="********">
-				                					<em>1-8 Characters</em>
-				              					</div>
-				            				</div>
-				            
-				            <!-- Text input-->
-				            				<div class="control-group">
-				              					<label class="control-label" for="reenterpassword">Re-Enter Password:</label>
-				              					<div class="controls">
-				                					<input id="reenterpassword" class="form-control input-large" name="reenterpassword" type="password" placeholder="********">
-				              					</div>
-				            				</div>
-				            
-				            <!-- Multiple Radios (inline) -->
-				            				<br>
-				            				<div class="control-group">
-				              					<label class="control-label" for="humancheck">Humanity Check:</label>
-				              					<div class="controls">
-				                					<label class="radio inline" for="humancheck-0">
-				                  						<input type="radio" name="humancheck" id="humancheck-0" value="robot" checked="checked">I'm a Robot</label>
-				                					<label class="radio inline" for="humancheck-1">
-				                  						<input type="radio" name="humancheck" id="humancheck-1" value="human">I'm Human</label>
-				              					</div>
-				            				</div>
-				            
-				            <!-- Button -->
-				            				<div class="control-group">
-				              					<label class="control-label" for="confirmsignup"></label>
-				              					<div class="controls">
-				                					<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
-				              					</div>
-				            				</div>
-				            			</fieldset>
-				            		</form>
-				      			</div>
-				    		</div>
-				      	</div>
-				      	<div class="modal-footer">
-				      		<center>
-				        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        	</center>
-				      	</div>
-				    </div>
-				  </div>
-				</div>
+				
 				
 			</div>
 
@@ -171,10 +46,11 @@
 		<div class="row" id="trending">
 			
 		        <div id="search">
-		    		<h2>Search for a friend or a room!</h2>
+		    		<h2>Search for a friend!</h2>
 		            <div id="custom-search-input">
 		                <div class="input-group col-md-12 col-sm-12">
-		                    <input type="text" class="form-control input-lg" placeholder="Buscar" />
+		                    {{> inputAutocomplete settings=settings id="legend" 
+		                    class="form-control" name="legend" placeholder="username"}}
 		                    <span class="input-group-btn">
 		                        <button class="btn btn-info btn-lg" type="button">
 		                            <i class="glyphicon glyphicon-search"></i>
@@ -185,26 +61,32 @@
 		        </div>
 			
 
-			
+				<h2>Trending public rooms</h2>
 				<div class="list-group" id="trending-public">
-					<a href="#" class="list-group-item">First item</a>
-					<a href="#" class="list-group-item">Second item</a>
-					<a href="#" class="list-group-item">Third item</a>
-					<a href="#" class="list-group-item">First item</a>
-					<a href="#" class="list-group-item">Second item</a>
-					<a href="#" class="list-group-item">Third item</a>
-					<a href="#" class="list-group-item">First item</a>
-					<a href="#" class="list-group-item">Second item</a>
-					<a href="#" class="list-group-item">Third item</a>
-					<a href="#" class="list-group-item">Third item</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+					<a href="/room" class="list-group-item">{{> trend}}</a>
+
 				</div>
 						
 		</div>
 
 		<div class="row" id="footer">
 			<p id="footer-text">
-				It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+				<i class="fa fa-copyright"></i> Suhas Maringanti 2015
 			</p>
 		</div>
 	</div>
+</template>
+
+<template name="standardLegends">
+    {{username}}
 </template>

@@ -1,0 +1,47 @@
+<template name="createroom">
+	<div class="container">
+    <h1>Create a room!</h1>                                    
+    <div id="create">
+        <form class="form-horizontal">
+          <fieldset>
+    <!-- Sign Up Form -->
+    <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="room">Room name:</label>
+                <div class="controls">
+                  <input id="room" name="room" class="form-control input-large" type="text">
+                </div>
+            </div>
+    
+    
+    <!-- Multiple Radios (inline) -->
+            <br>
+            <div class="control-group">
+                <label class="control-label" for="vis">Visibility:</label>
+                <div class="controls">
+                  <form id="visib">
+                  <label class="radio inline" for="vis-0">
+                      <input type="radio" name="vis" id="vis-0" value="public" checked="checked">Public</label>
+                  <label class="radio inline" for="vis-1">
+                      <input type="radio" name="vis" id="vis-1" value="private">Private</label>
+                  </form>
+                </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="confirmsignup"></label>
+              <div class="controls">
+                <button id="confirmcreate" name="confirmsignup" class="btn btn-success">Create</button>
+                <a href="/" class="btn btn-default" type="button">Home</a>
+              </div>
+            </div>
+  
+          </fieldset>
+        </form>
+    </div>
+
+    
+      
+    
+  </div>
+</template>

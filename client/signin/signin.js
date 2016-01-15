@@ -1,9 +1,4 @@
-Template.homepage.events ({
-
-	'click #signup': function(e) {
-	    e.preventDefault();
-	    Modal.show('myModal');
-  	},
+Template.signin.events ({
 
     'click #confirmsignup': function(event){
         event.preventDefault();
@@ -17,19 +12,19 @@ Template.homepage.events ({
 		Accounts.createUser({
 		    email: email,
 		    password: password,
+		    friends: [],
 		    profile: {
-				userName: user_name,
+		    	username: user_name,
 				image: "",
 				date: date
 		    }
-		}, 
+		},
 
 		function(error){
 		    if(error){
 		        console.log(error.reason); // Output error if registration fails
 		    } else {
-		    	Modal.hide('myModal');
-		        Router.go("userprofile"); // Redirect user if registration succeeds
+		        Router.go("/userprofile"); // Redirect user if registration succeeds
 		    }
 		});
 
@@ -46,28 +41,9 @@ Template.homepage.events ({
 		        console.log(error.reason); // Output error if registration fails
 		    } else {
 		        console.log("in");
-
-   				Modal.hide('myModal');
-
-		        Router.go("userprofile");
+		        Router.go("/userprofile");
 		    }
 		});
 			
     }
-});
-
-Template.homepage.helpers({
-  settings: function() {
-    return {
-      limit: 10,
-      rules: [
-        {
-          collection: Meteor.users,
-          field: 'username',
-          matchAll: true,
-          template: Template.standardLegends
-        }
-      ]
-    };
-  }
 });
