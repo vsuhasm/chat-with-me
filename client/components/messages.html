@@ -1,9 +1,11 @@
 <template name="messages">
 	<div class="message-history">
 		{{#if Template.subscriptionsReady}}
-			{{#each messages}}
-				{{> message text=text timestamp=timestamp user=user }}
-			{{/each}}
+			{{#with messages}}
+				{{#each item in message_history}}
+					{{> message text=item.text timestamp=item.timestamp user=item.user }}
+				{{/each}}
+			{{/with}}
 		{{else}}
 			Loading…
 		{{/if}}

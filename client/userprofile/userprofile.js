@@ -1,12 +1,25 @@
 Template.userprofile.helpers({
     username: function () {
       // Show newest tasks at the top
-      return Meteor.user().emails[0].address;
+      var user = Session.get('user');
+      return Meteor.users.findOne({'username': user}).username.toString();
     },
 
     created: function () {
       // Show newest tasks at the top
-      return Meteor.user().createdAt;
+      var user = Session.get('user');
+      return Meteor.users.findOne({'username': user}).createdAt.toString();
+
+    },
+
+    lastseen: function () {
+      // Show newest tasks at the top
+      var user = Session.get('user');
+      return Meteor.users.findOne({'username': user}).services.resume.loginTokens[0].when.toString();
+    },
+
+    rooms: function() {
+      return Rooms.find({});
     }
 });
 
@@ -16,7 +29,7 @@ Template.userprofile.events ({
 	'click #logout': function(e) {
 	    e.preventDefault();
 	    Meteor.logout(Session.set("ses", false));
-	    Router.go('/signin');
+	    Router.go('/');
   	}
 });
 
@@ -35,3 +48,5 @@ if (Meteor.isServer) {
 if (Meteor.isClient) {
 	Meteor.subscribe("userData");
 };
+
+Meteor.subscribe("allUsernames");

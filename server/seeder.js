@@ -1,41 +1,40 @@
 Meteor.startup(function() {
 
-  Meteor.users.remove({});
-  
-  Accounts.createUser({
-    username: "scotchio",
-    email: "scotchio@example.com",
-    password: "dummypassword",
-    friends: ["scott", "scotch"]
-  });
+  if (Meteor.users.find({}).count() === 0) {
+    _(10).times(function(n) {
+      var usern = Fake.word();
+      var em = usern+"@"+"gmail.com";
+      Accounts.createUser({
+        username: usern,
+        email: em,
+        password: "dummypassword",
+        friends: ["scott", "John", "Luis", "Mary"]
+      });
+    });
 
-  Accounts.createUser({
-    username: "scott",
-    email: "scott@example.com",
-    password: "dummypassword",
-    friends: ["scotchio", "scotch"]
-  });
+    Accounts.createUser({
+      username: 'John',
+      email: 'john@gmail.com',
+      password: "dummypassword",
+      friends: ["scott", "John", "Luis", "Mary"]
+    });
 
-  Accounts.createUser({
-    username: "scotch",
-    email: "scotch@example.com",
-    password: "dummypassword",
-    friends: ["scott", "scotchio"]
-  });
+    Accounts.createUser({
+      username: 'Bob',
+      email: 'bob@gmail.com',
+      password: "dummypassword",
+      friends: ["scott", "John", "Luis", "Mary"]
+    });
 
-  Accounts.createUser({
-    username: "scotchy",
-    email: "scotchy@example.com",
-    password: "dummypassword",
-    friends: ["scott", "scotchio"]
-  });
+    Accounts.createUser({
+      username: 'Mary',
+      email: 'mary@gmail.com',
+      password: "dummypassword",
+      friends: ["scott", "John", "Luis", "Mary"]
+    });
 
-  Accounts.createUser({
-    username: "scotchin",
-    email: "scotchin@example.com",
-    password: "dummypassword",
-    friends: ["scott", "scotchio"]
-  });
+  }
+
 
   Factory.define('message', Messages, {
     text: function() {
@@ -51,16 +50,32 @@ Meteor.startup(function() {
   Messages.remove({});
 
   if (Messages.find({}).count() === 0) {
-    _(10).times(function(n) {
+    _(5).times(function(n) {
       Factory.create('message');
     });
   }
 
-  Channels.remove({});
-  Channels.insert({
-    name: "general"
+  Factory.define('room', Rooms, {
+    name: function() {
+      return Fake.word();
+    },
+    admin: Meteor.users.findOne()._id,
+    timestamp: Date.now(),
+    members: function() {
+      return Meteor.users.find({}).fetch();
+    },
+    message_history: function() {
+      return Messages.find({}).fetch();
+    },
+    visible: 'public',
+    numMem: function() {
+      return Meteor.users.find({}).fetch().length;
+    }
   });
-  Channels.insert({
-    name: "random"
-  });
+
+  if (Rooms.find({}).count() === 0) {
+    _(3).times(function(n) {
+      Factory.create('room');
+    });
+  }
 });

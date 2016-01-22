@@ -29,7 +29,7 @@ Template.homepage.events ({
 		        console.log(error.reason); // Output error if registration fails
 		    } else {
 		    	Modal.hide('myModal');
-		        Router.go("userprofile"); // Redirect user if registration succeeds
+		        Router.go("/" + user_name +"/profile"); // Redirect user if registration succeeds
 		    }
 		});
 
@@ -49,11 +49,17 @@ Template.homepage.events ({
 
    				Modal.hide('myModal');
 
-		        Router.go("userprofile");
+		        Router.go("/" + user_name +"/profile");
 		    }
 		});
 			
-    }
+    },
+
+    'click #logout': function(e) {
+	    e.preventDefault();
+	    Meteor.logout(Session.set("ses", false));
+	    Router.go('/');
+  	}
 });
 
 Template.homepage.helpers({
@@ -69,5 +75,10 @@ Template.homepage.helpers({
         }
       ]
     };
+  },
+
+
+  trending: function() {
+  	return Rooms.find({visible: 'public'}, {sort: {numMem: -1}});
   }
 });

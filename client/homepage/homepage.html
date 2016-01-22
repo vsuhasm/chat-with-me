@@ -14,7 +14,7 @@
 				    <div class="collapse navbar-collapse" id="myNavbar">
 				      <ul class="nav navbar-nav">
 				        {{#if currentUser}}<li><a href="/createroom"><span class="glyphicon glyphicon-globe"></span> Create room</a></li>
-				        <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>{{/if}}
+				        <li id="logout"><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>{{/if}}
 				        <li><a href="/contact"><span class="glyphicon glyphicon-user"></span> Contact</a></li>
 				        
 				        <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Login/Register</a></li>
@@ -63,18 +63,16 @@
 
 				<h2>Trending public rooms</h2>
 				<div class="list-group" id="trending-public">
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-					<a href="/room" class="list-group-item">{{> trend}}</a>
-
+					{{#each trending}}
+					<a href="/{{name}}" class="list-group-item">
+					<div class="message">
+						<a href="/{{name}}" class="message_profile-pic"></a>
+						<a href="/{{name}}" class="message_username">{{name}}</a>
+						<span class="message_timestamp">Created at {{timestampToTime timestamp}}</span>
+						<span class="message_star">Join</span>
+						<span class="message_content">Members: {{members.length}} Posts:{{message_history.length}}</span>
+					</div></a>
+					{{/each}}
 				</div>
 						
 		</div>
@@ -88,5 +86,5 @@
 </template>
 
 <template name="standardLegends">
-    {{username}}
+	<p id="user"><a href="/{{username}}/profile">{{username}}</a></p>
 </template>

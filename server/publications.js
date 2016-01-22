@@ -1,3 +1,4 @@
+
 Meteor.publish('messages', function (channel) {
 	return Messages.find({channel: channel});
 });
@@ -8,7 +9,14 @@ Meteor.publish('channels', function () {
 
 Meteor.publish("allUsernames", function () {
   return Meteor.users.find({}, {fields: {
-  	"username": 1,
-  	"services.github.username": 1
+  	"createdAt": true,
+  	"profile": true,
+  	"services": true,
+  	"username": true,
   }});
 });
+
+Meteor.publish("userStatus", function() {
+  return Meteor.users.find({ "status.online": true });
+});
+

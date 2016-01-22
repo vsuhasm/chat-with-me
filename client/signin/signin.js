@@ -3,28 +3,26 @@ Template.signin.events ({
     'click #confirmsignup': function(event){
         event.preventDefault();
 
-        let user_name = $('[id=user_id]').val(); 
+        let username = $('[id=user_id]').val(); 
         let email = $('[id=Email]').val();
         let password = $('[id=password]').val();
         let dt = new Date();
 		let date = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
 
+
 		Accounts.createUser({
-		    email: email,
-		    password: password,
-		    friends: [],
-		    profile: {
-		    	username: user_name,
-				image: "",
-				date: date
-		    }
+			username: username,
+	        email: email,
+	        password: password,
+	        friends: ["scott", "John", "Luis", "Mary"]
 		},
+
 
 		function(error){
 		    if(error){
 		        console.log(error.reason); // Output error if registration fails
 		    } else {
-		        Router.go("/userprofile"); // Redirect user if registration succeeds
+		        Router.go("/" + username + "/profile"); // Redirect user if registration succeeds
 		    }
 		});
 
@@ -41,7 +39,7 @@ Template.signin.events ({
 		        console.log(error.reason); // Output error if registration fails
 		    } else {
 		        console.log("in");
-		        Router.go("/userprofile");
+		        Router.go("/" + user_name + "/profile");
 		    }
 		});
 			

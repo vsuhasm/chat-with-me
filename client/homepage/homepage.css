@@ -113,3 +113,11 @@ nav {
 	text-align: center;
 	font-size: 1.5em;
 }
+
+#user {
+	text-align: left;
+}
+
+#user a {
+	color: blue;
+}

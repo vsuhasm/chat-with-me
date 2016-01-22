@@ -6,9 +6,8 @@ Template.footer.events({
       if (charCode == 13) {
         e.stopPropagation();
         Meteor.call('newMessage', {
-          text: $('.input-box_text').val(),
-          channel: Session.get('channel')
-        });
+          text: $('.input-box_text').val()
+        }, Session.get('curroom'));
         $('.input-box_text').val("");
         return false;
       }    

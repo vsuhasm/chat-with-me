@@ -1,9 +1,12 @@
 Template.messages.helpers({
-  messages: Messages.find({})
+  messages: function(){
+  	var room = Session.get('curroom');
+  	return Rooms.findOne({name: room});
+  }
 });
 
 Accounts.ui.config({
-    passwordSignupFields: 'USERNAME_AND_EMAIL'
+    passwordSignupFields: 'USERNAME_ONLY'
 });
 
 Template.registerHelper('currentChannel', function () {
@@ -12,6 +15,11 @@ Template.registerHelper('currentChannel', function () {
 
 Template.registerHelper('currentRoom', function () {
 	return Session.get('curroom');
+});
+
+Template.registerHelper('currentRoomVis', function () {
+	var room = Session.get('curroom');
+	return Rooms.findOne({name: room}).visible;
 });
 
 Template.registerHelper("timestampToTime", function (timestamp) {
@@ -27,9 +35,7 @@ Template.registerHelper("usernameFromId", function (userId) {
 	if (typeof user === "undefined") {
 		return "Anonymous";
 	}
-	if (typeof user.services.github !== "undefined") {
-		return user.services.github.username;
-	}
+
 	return user.username;
 });
 
@@ -48,7 +54,20 @@ Template.listings.helpers({
 	},
 
 	friends: function() {
-		return Meteor.users.find({});
+		var room = Session.get('curroom');
+		var onlinemem = [];
+		var mem = Rooms.findOne({name: room}).members;
+		var i;
+		for (i = 0; i < mem.length; i++) {
+		    if (Meteor.users.findOne({$and:[{username: mem[i].username}, 
+		    	{"status.online": true}]})) {
+		    	
+		    	onlinemem.push(mem[i]);
+		    }
+		}
+
+		return onlinemem;
+
 	}
 });
 
@@ -61,3 +80,5 @@ Template.channel.helpers({
 		}
 	}
 });
+
+Meteor.subscribe("userStatus");
